@@ -1,0 +1,10 @@
+schema: schema.graphql
+operations: "*_test.go"
+generated: generated.go
+allow_broken_features: true
+use_extensions: true
+bindings:
+  Date:
+    type: time.Time
+    marshaler: "github.com/opiuman/genqlient/internal/testutil.MarshalDate"
+    unmarshaler: "github.com/opiuman/genqlient/internal/testutil.UnmarshalDate"

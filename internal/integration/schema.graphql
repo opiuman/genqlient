@@ -1,0 +1,56 @@
+scalar Date
+
+type Query {
+  me: User
+  user(id: ID): User
+  being(id: ID!): Being
+  beings(ids: [ID!]!): [Being]!
+  lotteryWinner(number: Int!): Lucky
+  usersBornOn(date: Date!): [User!]!
+  usersBornOnDates(dates: [Date!]!): [User!]!
+  userSearch(birthdate: Date, id: ID): [User]
+  fail: Boolean
+}
+
+type Mutation {
+  createUser(input: NewUser!): User!
+}
+
+type User implements Being & Lucky {
+  id: ID!
+  name: String!
+  luckyNumber: Int
+  hair: Hair
+  birthdate: Date
+  friends: [User!]!
+}
+
+input NewUser {
+    name: String!
+}
+
+type Hair { color: String }   # silly name to confuse the name-generator
+
+type Animal implements Being {
+  id: ID!
+  name: String!
+  species: Species!
+  owner: Being
+  hair: BeingsHair
+}
+
+type BeingsHair { hasHair: Boolean! }   # silly name to confuse the name-generator
+
+enum Species {
+  DOG
+  COELACANTH
+}
+
+interface Being {
+  id: ID!
+  name: String!
+}
+
+interface Lucky {
+  luckyNumber: Int
+}

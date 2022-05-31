@@ -1,0 +1,14 @@
+query getViewer {
+  viewer {
+    MyName: name
+    createdAt
+  }
+}
+
+# getUser gets the given user's name from their username.
+query getUser($Login: String!) {
+  user(login: $Login) {
+    theirName: name
+    createdAt
+  }
+}

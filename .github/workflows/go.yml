@@ -1,0 +1,45 @@
+name: Go
+
+on:
+  push:
+    branches: [ "*" ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go: [ '1.16', '1.17', '1.18' ]
+
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v1
+      with:
+        go-version: ${{ matrix.go }}
+      id: go
+
+    - name: Git checkout
+      uses: actions/checkout@v2
+
+    - name: Run tests
+      env:
+        # Needed for the example-test to run.
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        go test -cover -v ./...
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+
+    - name: Run lint
+      uses: golangci/golangci-lint-action@v2
+      with:
+        version: v1.45   # should match internal/lint/go.mod
