@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	github.com/99designs/gqlgen v0.17.9
-	github.com/opiuman/genqlient v0.5.0
+	github.com/opiuman/genqlient v0.6.0
 	github.com/agnivade/levenshtein v1.1.1 // indirect
 	github.com/alexflint/go-arg v1.4.3
 	github.com/bradleyjkemp/cupaloy/v2 v2.7.0
